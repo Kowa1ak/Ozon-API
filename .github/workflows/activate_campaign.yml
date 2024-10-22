@@ -6,9 +6,8 @@ on:
   workflow_dispatch:       # Позволяет запускать вручную через интерфейс GitHub
 
 jobs:
-  run-python-script:
+  build:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
