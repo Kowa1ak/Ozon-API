@@ -1,12 +1,12 @@
-name: Activate Campaign
+name: Run Activate Campaign at 13:00
 
 on:
   schedule:
-    - cron: "*/5 * * * *"  # Запуск каждый день в 12:00
-  workflow_dispatch:
+    - cron: '0 9 * * *'  # Каждый день в 13:00 по UTC
+  workflow_dispatch:       # Позволяет запускать вручную через интерфейс GitHub
 
 jobs:
-  activate:
+  run-python-script:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,14 +14,14 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
-        python-version: '3.8'
+        python-version: '3.9'  # Укажите версию Python, которая вам нужна
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install requests
 
-    - name: Run activation script
+    - name: Run the Python script
       run: python ActivateComp.py
