@@ -2,7 +2,7 @@ name: Activate Campaign
 
 on:
   schedule:
-    - cron: "5 11 * * *"  # Запуск каждый день в 12:00
+    - cron: "20 11 * * *"  # Запуск каждый день в 12:00
   workflow_dispatch:
 
 jobs:
