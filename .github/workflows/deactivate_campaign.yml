@@ -2,7 +2,7 @@ name: Deactivate Campaign
 
 on:
   schedule:
-    - cron: "55 10 * * *"  # Запуск каждый день в 13:00
+    - cron: "*/5 * * * *"  # Запуск каждый день в 13:00
   workflow_dispatch:
 
 jobs:
