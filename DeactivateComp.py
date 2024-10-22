@@ -19,25 +19,34 @@ if response.status_code == 200:
     token = response.json().get("access_token")
     print(f"Access Token: {token}")
     
-    # Деактивация кампании
-    campaign_id = "10237777"
-    url_deactivate = f"https://api-performance.ozon.ru/api/client/campaign/{campaign_id}/deactivate"
-    headers_deactivate = {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "Authorization": f"Bearer {token}"
-    }
-    data_deactivate = {}
+    # Список идентификаторов кампаний
+    campaign_ids = [
+        "12557394", "12557366", "12557376", "12557374", "12561723", "12557372",
+        "12560909", "12561739", "12557390", "12560107", "12569835", "12569894",
+        "12580074", "12580113", "12547533", "12550058", "12550118", "12550082",
+        "12547161", "12550070", "12422084", "12550099", "12548593", "12570690",
+        "12570724", "12580167", "12585641", "12585656", "12585666", "12585675"
+    ]
+    
+    # Деактивация кампаний
+    for campaign_id in campaign_ids:
+        url_deactivate = f"https://api-performance.ozon.ru/api/client/campaign/{campaign_id}/deactivate"
+        headers_deactivate = {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": f"Bearer {token}"
+        }
+        data_deactivate = {}
 
-    response_deactivate = requests.post(url_deactivate, headers=headers_deactivate, data=json.dumps(data_deactivate))
+        response_deactivate = requests.post(url_deactivate, headers=headers_deactivate, data=json.dumps(data_deactivate))
 
-    if response_deactivate.status_code == 200:
-        campaign_info = response_deactivate.json()
-        print("Campaign Deactivated:")
-        print(json.dumps(campaign_info, indent=4))
-    else:
-        print(f"Failed to deactivate campaign: {response_deactivate.status_code}")
-        print(response_deactivate.text)
+        if response_deactivate.status_code == 200:
+            campaign_info = response_deactivate.json()
+            print(f"Campaign {campaign_id} Deactivated:")
+            print(json.dumps(campaign_info, indent=4))
+        else:
+            print(f"Failed to deactivate campaign {campaign_id}: {response_deactivate.status_code}")
+            print(response_deactivate.text)
 else:
     print(f"Failed to get token: {response.status_code}")
     print(response.text)
